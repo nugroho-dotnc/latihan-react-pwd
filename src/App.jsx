@@ -6,7 +6,7 @@ function App() {
   const [count, setCount] = useState(0)
   const [disabled, setDisabled] = useState(false)
   useEffect(() => {
-    if(count >= 100 || count < 0){
+    if(count >= 1000 || count < 0){
       setDisabled(true)
     }else{
       setDisabled(false)
@@ -21,40 +21,43 @@ function App() {
     setCount(count - 1)
   }
   const divide = () =>  {
-    setCount(count / 2)
+    setCount(count / 10)
   }
   const multiply = () => {
-    let tempCount = count * 2
-    if(tempCount < 100 ){
-      setCount(count * 2)
+    let tempCount = count * 10
+    if(tempCount > 100 ){
+      setDisabled(true)
+    }else{
+      setCount(tempCount)
     }
   }
   const reset = () => {
     setCount(0)
+    setDisabled(false)
   }
   return (
     <>
       <h1>
-        {count == 100 || count < 0? "You're done" : count}
+        {disabled? "You're done" : count}
       </h1>
       <p>
-        {count == 100 || count < 0? "Sesi Increment dan decrement sudah habis" : "increment dibatasi dari 0 - 100"}
+        {disabled? "Sesi Increment dan decrement sudah habis" : "increment dibatasi dari 0 - 1000"}
         
       </p>
       <button disabled={disabled} onClick={divide}>
-        divided by 2
+        divided by 10
       </button>
       <button disabled={disabled} onClick={decrement}>
         decrease
       </button>
-      <button disabled={!disabled} onClick={reset}>
+      <button onClick={reset}>
         Reset!
       </button>
       <button disabled={disabled} onClick={increment}>
         increase
       </button>
       <button disabled={disabled} onClick={multiply}> 
-        multiply by 2
+        multiply by 10
       </button>
     </>
   )
